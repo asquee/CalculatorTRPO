@@ -122,7 +122,7 @@ def main():
             print(f"инверсия b: {b.inv()}")
             print(f"a * b = {a * b}")
             print(f"a ^ b = {a ** b}")
-            print(f"√[b](a) = {a.root(b)}")  # Изменено здесь
+            print(f"√[b](a) = {a.root(b)}") 
             print(f"sin(a) = {a.sin()}")
             print(f"cos(a) = {a.cos()}")
             print(f"tan(a) = {a.tan()}")

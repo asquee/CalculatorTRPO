@@ -1,55 +1,50 @@
 import math
 
-class S:
+class Scalar:
     def __init__(self, x):
         self.x = x
 
     def __add__(self, B):  # Сумма
-        return S(self.x + B.x)
+        return Scalar(self.x + B.x)
 
     def inv(self):  # Инверсия
-        return S(-self.x)
+        return Scalar(-self.x)
 
     def __mul__(self, B):  # Произведение
-        return S(self.x * B.x)
+        return Scalar(self.x * B.x)
 
     def __pow__(self, B):  # Степень
-        return S(self.x ** B.x)
+        return Scalar(self.x ** B.x)
 
     def root(self, B):  # Степенной корень √[b](a)
-        if self.x < 0 and B.x % 2 == 0:
-            print("Ошибка: нельзя извлечь корень четной степени из отрицательного числа!")
-            return S(float('nan'))
-        return S(self.x ** (1 / B.x))
+        return Scalar(self.x ** (1 / B.x))
 
     def sin(self):
-        return S(math.sin(self.x))
+        return Scalar(math.sin(self.x))
 
     def cos(self):
-        return S(math.cos(self.x))
+        return Scalar(math.cos(self.x))
 
     def tan(self):
-        return S(math.tan(self.x))
+        return Scalar(math.tan(self.x))
 
     def __str__(self):
         return f"{self.x}"
 
-
-class V:
+class Vector:
     def __init__(self, arr):
         self.arr = arr
 
     def __add__(self, B):  # Поэлементное сложение
-        return V([a + b for a, b in zip(self.arr, B.arr)])
+        return Vector([a + b for a, b in zip(self.arr, B.arr)])
 
     def __mul__(self, B):  # Поэлементное умножение
-        return V([a * b for a, b in zip(self.arr, B.arr)])
+        return Vector([a * b for a, b in zip(self.arr, B.arr)])
 
     def __str__(self):
         return str(self.arr)
 
-
-class M:
+class Matrix:
     def __init__(self, data):
         self.data = data
 
@@ -58,14 +53,14 @@ class M:
         for i in range(len(self.data)):
             row = [a + b for a, b in zip(self.data[i], B.data[i])]
             res.append(row)
-        return M(res)
+        return Matrix(res)
 
     def __mul__(self, B):  # Поэлементное умножение
         res = []
         for i in range(len(self.data)):
             row = [a * b for a, b in zip(self.data[i], B.data[i])]
             res.append(row)
-        return M(res)
+        return Matrix(res)
 
     def __str__(self):
         return str(self.data)
@@ -74,13 +69,13 @@ class M:
 # Функции ввода
 def input_scalar(name):
     val = float(input(f"{name} = "))
-    return S(val)
+    return Scalar(val)
 
 
 def input_vector(name):
     s = input(f"{name} = ")
     vals = [float(x) for x in s.split()]
-    return V(vals)
+    return Vector(vals)
 
 
 def input_matrix(name):
@@ -92,7 +87,7 @@ def input_matrix(name):
             break
         row = [float(x) for x in line.split()]
         data.append(row)
-    return M(data)
+    return Matrix(data)
 
 
 # Меню
@@ -122,7 +117,7 @@ def main():
             print(f"инверсия b: {b.inv()}")
             print(f"a * b = {a * b}")
             print(f"a ^ b = {a ** b}")
-            print(f"√[b](a) = {a.root(b)}") 
+            print(f"√[b](a) = {a.root(b)}")
             print(f"sin(a) = {a.sin()}")
             print(f"cos(a) = {a.cos()}")
             print(f"tan(a) = {a.tan()}")
